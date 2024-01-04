@@ -5,8 +5,10 @@ import { FaEraser } from "react-icons/fa";
 import { FaArrowRotateLeft } from "react-icons/fa6";
 import { FaArrowRotateRight } from "react-icons/fa6";
 import { FaDownload } from "react-icons/fa6";
-
 import { Action } from "../../../constant";
+
+import styles from './index.module.css'
+import cx from 'classnames';
 
 interface Props {
   handleMenuClick: (arg: Action) => void,
@@ -14,21 +16,21 @@ interface Props {
 }
 export default function Menu({handleMenuClick,actionName}: Props) {
   return (
-    <div className="flex cursor-pointer justify-center gap-16 py-10 text-xl shadow-sm  ">
-      <div>
-        <FaPencilAlt onClick={() => handleMenuClick(Action.PENCIL)} />
+    <div className={styles.menuContainer}>
+      <div className={cx(styles.iconWrapper, {[styles.active]: actionName === Action.PENCIL})}  onClick={() => handleMenuClick(Action.PENCIL)} >
+        <FaPencilAlt/>
       </div>
-      <div>
-        <FaEraser  onClick={() => handleMenuClick(Action.ERASER)} />
+      <div className={cx(styles.iconWrapper, {[styles.active]: actionName === Action.ERASER})} onClick={() => handleMenuClick(Action.ERASER)}>
+        <FaEraser  />
       </div>
-      <div>
-        <FaArrowRotateLeft onClick={() => handleMenuClick(Action.UNDO)} />
+      <div className={styles.iconWrapper} onClick={() => handleMenuClick(Action.UNDO)}>
+        <FaArrowRotateLeft  />
       </div>
-      <div>
-        <FaArrowRotateRight onClick={() => handleMenuClick(Action.REDO)} />
+      <div className={styles.iconWrapper} onClick={() => handleMenuClick(Action.REDO)} >
+        <FaArrowRotateRight />
       </div>
-      <div>
-        <FaDownload onClick={() => handleMenuClick(Action.DOWNLOAD)} />
+      <div className={styles.iconWrapper} onClick={() => handleMenuClick(Action.DOWNLOAD)}>
+        <FaDownload  />
       </div>
     </div>
   );

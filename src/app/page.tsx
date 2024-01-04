@@ -7,7 +7,7 @@ import { Action } from "../../constant";
 import { useState } from "react";
 
 export default function Home() {
-  const [actionName, setActionName] = useState("");
+  const [actionName, setActionName] = useState(Action.PENCIL);
   const [colorName, setColorName] = useState("");
   const [brushSize, setBrushSize] = useState(0);
 
@@ -27,7 +27,7 @@ export default function Home() {
     <main>
       <Menu handleMenuClick={handleMenuClick} actionName={actionName} />
       <div className="flex">
-      <ToolBox updateBrushSize={updateBrushSize} updateColor={updateColor} brushSize={brushSize} colorName={colorName}/>
+      <ToolBox updateBrushSize={updateBrushSize} updateColor={updateColor} brushSize={brushSize} colorName={colorName} actionName={actionName}/>
       <Board colorName={colorName} brushSize={brushSize}/>
       </div>
     </main>

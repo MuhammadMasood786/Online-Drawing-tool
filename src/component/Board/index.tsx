@@ -83,12 +83,7 @@ export default function Board({ brushSize, colorName }: Props) {
   }, []);
   return (
     <div>
-      <canvas
-        ref={canvasRef}
-        width={1450}
-        height={800}
-        className="border border-black rounded-md mt-2"
-      />
+      <canvas ref={canvasRef} />
     </div>
   );
 }
