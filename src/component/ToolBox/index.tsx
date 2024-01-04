@@ -36,7 +36,7 @@ export default function ToolBox({
         </div>
       </div>
 
-      {actionName == Action.PENCIL && (
+      {actionName != Action.ERASER && (
         <div className={styles.toolItem}>
           <h3 className={styles.toolText}>Stroke Color: </h3>
           <ChromePicker

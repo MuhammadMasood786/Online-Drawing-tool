@@ -28,7 +28,7 @@ export default function Home() {
       <Menu handleMenuClick={handleMenuClick} actionName={actionName} />
       <div className="flex">
       <ToolBox updateBrushSize={updateBrushSize} updateColor={updateColor} brushSize={brushSize} colorName={colorName} actionName={actionName}/>
-      <Board colorName={colorName} brushSize={brushSize}/>
+      <Board colorName={colorName} brushSize={brushSize} actionName={actionName} setActionName={setActionName}/>
       </div>
     </main>
   );

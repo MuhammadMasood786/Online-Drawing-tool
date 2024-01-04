@@ -1,17 +1,39 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useRef } from "react";
+import { Action } from "../../../constant";
 
 interface Props {
   brushSize: number;
   colorName: string;
+  actionName: string;
+  setActionName: Dispatch<SetStateAction<string>>;
 }
 
-export default function Board({ brushSize, colorName }: Props) {
+export default function Board({
+  brushSize,
+  colorName,
+  actionName,
+  setActionName,
+}: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const drawHistory = useRef([]);
   const historyPointer = useRef(0);
   const shouldDraw = useRef(false);
+
+  useEffect(() => {
+    if (!canvasRef.current) return;
+    const canvas = canvasRef.current;
+    const context = canvas.getContext("2d");
+    if (actionName == Action.DOWNLOAD) {
+      const URL = canvas.toDataURL();
+      const anchor = document.createElement("a");
+      anchor.href = URL;
+      anchor.download = "sketch.jpg";
+      anchor.click();
+    }
+    setActionName("");
+  }, [actionName]);
 
   useEffect(() => {
     if (!canvasRef.current) return;
