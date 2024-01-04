@@ -25,15 +25,27 @@ export default function Board({
     if (!canvasRef.current) return;
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
-    if (actionName == Action.DOWNLOAD) {
-      const URL = canvas.toDataURL();
-      const anchor = document.createElement("a");
-      anchor.href = URL;
-      anchor.download = "sketch.jpg";
-      anchor.click();
+    if (!["PENCIL", "ERASER"].includes(actionName)) {
+      if (actionName == Action.DOWNLOAD) {
+        const URL = canvas.toDataURL();
+        const anchor = document.createElement("a");
+        anchor.href = URL;
+        anchor.download = "sketch.jpg";
+        anchor.click();
+      } else if (actionName == Action.UNDO || actionName == Action.REDO) {
+        if (historyPointer.current > 0 && actionName == Action.UNDO)
+          historyPointer.current -= 1;
+        if (
+          historyPointer.current < drawHistory.current.length - 1 &&
+          actionName == Action.REDO
+        )
+          historyPointer.current += 1;
+      }
+      const imageData = drawHistory.current[historyPointer.current];
+      context.putImageData(imageData, 0, 0);
+      setActionName("");
     }
-    setActionName("");
-  }, [actionName]);
+  }, [actionName, setActionName]);
 
   useEffect(() => {
     if (!canvasRef.current) return;

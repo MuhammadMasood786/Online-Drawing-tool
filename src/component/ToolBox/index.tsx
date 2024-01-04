@@ -41,6 +41,7 @@ export default function ToolBox({
           <h3 className={styles.toolText}>Stroke Color: </h3>
           <ChromePicker
             color={colorName}
+            
             onChange={(e: any) => updateColor(e.hex)}
           />
         </div>
